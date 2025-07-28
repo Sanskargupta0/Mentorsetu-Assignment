@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ThemeToggle } from "@/components/theme-toggle"
 import Link from "next/link"
 import {
   Calendar,
@@ -114,25 +115,29 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b bg-white sticky top-0 z-50">
+      <header className="border-b bg-background/95 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <BookOpen className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">MentorSetu.ai</span>
+            <span className="text-xl font-bold text-foreground">MentorSetu.ai</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6">
-            <Link href="/mentors" className="text-gray-600 hover:text-gray-900">
+            <Link href="/mentors" className="text-muted-foreground hover:text-foreground">
               Find Mentors
             </Link>
             <Link href="/dashboard" className="text-blue-600 font-medium">
               Dashboard
             </Link>
             <Button variant="outline">Become a Mentor</Button>
+            <ThemeToggle />
           </nav>
+          <div className="md:hidden">
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
