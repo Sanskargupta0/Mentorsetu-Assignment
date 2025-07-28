@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { ResponsiveHeader } from "@/components/responsive-header"
 import Link from "next/link"
 import { Star, MapPin, Filter, Search, BookOpen, Users } from "lucide-react"
 
@@ -48,7 +48,7 @@ export default function MentorsPage() {
       price: 2500,
       location: "San Francisco, CA",
       experience: "10+ years",
-      avatar: "/placeholder.svg?height=100&width=100&text=SJ",
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
       category: "Technology",
     },
     {
@@ -63,7 +63,7 @@ export default function MentorsPage() {
       price: 3000,
       location: "Seattle, WA",
       experience: "8+ years",
-      avatar: "/placeholder.svg?height=100&width=100&text=MC",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
       category: "Product",
     },
     {
@@ -78,7 +78,7 @@ export default function MentorsPage() {
       price: 2800,
       location: "Austin, TX",
       experience: "12+ years",
-      avatar: "/placeholder.svg?height=100&width=100&text=ER",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
       category: "Design",
     },
     {
@@ -93,7 +93,7 @@ export default function MentorsPage() {
       price: 3200,
       location: "Los Angeles, CA",
       experience: "9+ years",
-      avatar: "/placeholder.svg?height=100&width=100&text=DK",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
       category: "Data Science",
     },
     {
@@ -108,7 +108,7 @@ export default function MentorsPage() {
       price: 2200,
       location: "New York, NY",
       experience: "7+ years",
-      avatar: "/placeholder.svg?height=100&width=100&text=LP",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
       category: "Marketing",
     },
     {
@@ -123,7 +123,7 @@ export default function MentorsPage() {
       price: 4000,
       location: "San Francisco, CA",
       experience: "15+ years",
-      avatar: "/placeholder.svg?height=100&width=100&text=JW",
+      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
       category: "Business",
     },
   ]
@@ -173,48 +173,25 @@ export default function MentorsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <BookOpen className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-xl font-bold text-foreground">MentorSetu.ai</span>
-          </Link>
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link href="/mentors" className="text-blue-600 font-medium">
-              Find Mentors
-            </Link>
-            <Link href="/dashboard" className="text-muted-foreground hover:text-foreground">
-              Dashboard
-            </Link>
-            <Button variant="outline">Become a Mentor</Button>
-            <ThemeToggle />
-          </nav>
-          <div className="md:hidden">
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
+      <ResponsiveHeader currentPage="mentors" />
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Find Your Perfect Mentor</h1>
-          <p className="text-gray-600">Connect with industry experts and accelerate your growth</p>
+        <div className="mb-6 sm:mb-8 text-center sm:text-left">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2">Find Your Perfect Mentor</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">Connect with industry experts and accelerate your growth</p>
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
+        <div className="bg-card rounded-lg shadow-sm border p-4 sm:p-6 mb-6 sm:mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <Filter className="h-5 w-5 text-gray-500" />
-            <span className="font-medium text-gray-900">Filter Mentors</span>
+            <Filter className="h-5 w-5 text-muted-foreground" />
+            <span className="font-medium text-foreground">Filter Mentors</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="relative sm:col-span-2 lg:col-span-1">
+              <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search mentors, skills..."
                 value={searchTerm}
@@ -265,45 +242,45 @@ export default function MentorsPage() {
         </div>
 
         {/* Results Count */}
-        <div className="mb-6">
-          <p className="text-gray-600">
+        <div className="mb-4 sm:mb-6">
+          <p className="text-muted-foreground text-sm sm:text-base">
             Showing {filteredMentors.length} of {mentors.length} mentors
           </p>
         </div>
 
         {/* Mentor Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredMentors.map((mentor) => (
             <Card key={mentor.id} className="hover:shadow-lg transition-shadow border-0 shadow-md">
-              <CardContent className="p-6">
-                <div className="flex items-start space-x-4 mb-4">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-start space-x-3 sm:space-x-4 mb-4">
                   <img
                     src={mentor.avatar || "/placeholder.svg"}
                     alt={mentor.name}
-                    className="w-16 h-16 rounded-full object-cover"
+                    className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover flex-shrink-0"
                   />
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 text-lg">{mentor.name}</h3>
-                    <p className="text-blue-600 font-medium">{mentor.title}</p>
-                    <p className="text-gray-500 text-sm">{mentor.company}</p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-foreground text-base sm:text-lg truncate">{mentor.name}</h3>
+                    <p className="text-blue-600 dark:text-blue-400 font-medium text-sm sm:text-base truncate">{mentor.title}</p>
+                    <p className="text-muted-foreground text-xs sm:text-sm truncate">{mentor.company}</p>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4 mb-4 text-sm text-gray-600">
+                <div className="flex items-center justify-between mb-4 text-xs sm:text-sm text-muted-foreground">
                   <div className="flex items-center">
-                    <Star className="h-4 w-4 text-yellow-400 fill-current mr-1" />
+                    <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current mr-1" />
                     <span className="font-medium">{mentor.rating}</span>
                     <span className="ml-1">({mentor.reviewCount})</span>
                   </div>
                   <div className="flex items-center">
-                    <MapPin className="h-4 w-4 mr-1" />
-                    <span>{mentor.location}</span>
+                    <MapPin className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                    <span className="truncate">{mentor.location}</span>
                   </div>
                 </div>
 
-                <p className="text-gray-600 text-sm mb-4 line-clamp-2">{mentor.bio}</p>
+                <p className="text-muted-foreground text-xs sm:text-sm mb-4 line-clamp-2">{mentor.bio}</p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-1 sm:gap-2 mb-4">
                   {mentor.expertise.slice(0, 3).map((skill, index) => (
                     <Badge key={index} variant="secondary" className="text-xs">
                       {skill}
@@ -316,9 +293,9 @@ export default function MentorsPage() {
                   )}
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="text-lg font-bold text-gray-900">₹{mentor.price.toLocaleString()}/session</div>
-                  <Button asChild size="sm">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
+                  <div className="text-base sm:text-lg font-bold text-foreground">₹{mentor.price.toLocaleString()}/session</div>
+                  <Button asChild size="sm" className="w-full sm:w-auto">
                     <Link href={`/mentors/${mentor.id}`}>View Profile</Link>
                   </Button>
                 </div>
@@ -328,10 +305,10 @@ export default function MentorsPage() {
         </div>
 
         {filteredMentors.length === 0 && (
-          <div className="text-center py-12">
-            <Users className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No mentors found</h3>
-            <p className="text-gray-600">Try adjusting your filters or search terms</p>
+          <div className="text-center py-8 sm:py-12">
+            <Users className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-base sm:text-lg font-medium text-foreground mb-2">No mentors found</h3>
+            <p className="text-muted-foreground text-sm sm:text-base">Try adjusting your filters or search terms</p>
           </div>
         )}
       </div>

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { ResponsiveHeader } from "@/components/responsive-header"
 import Link from "next/link"
 import {
   Calendar,
@@ -82,26 +82,26 @@ export default function DashboardPage() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "confirmed":
-        return <CheckCircle className="h-4 w-4 text-green-600" />
+        return <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
       case "completed":
-        return <CheckCircle className="h-4 w-4 text-blue-600" />
+        return <CheckCircle className="h-4 w-4 text-blue-600 dark:text-blue-400" />
       case "cancelled":
-        return <XCircle className="h-4 w-4 text-red-600" />
+        return <XCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
       default:
-        return <AlertCircle className="h-4 w-4 text-yellow-600" />
+        return <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-400" />
     }
   }
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "confirmed":
-        return "bg-green-100 text-green-800"
+        return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400"
       case "completed":
-        return "bg-blue-100 text-blue-800"
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
       case "cancelled":
-        return "bg-red-100 text-red-800"
+        return "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400"
       default:
-        return "bg-yellow-100 text-yellow-800"
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400"
     }
   }
 
@@ -116,84 +116,61 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <BookOpen className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-xl font-bold text-foreground">MentorSetu.ai</span>
-          </Link>
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link href="/mentors" className="text-muted-foreground hover:text-foreground">
-              Find Mentors
-            </Link>
-            <Link href="/dashboard" className="text-blue-600 font-medium">
-              Dashboard
-            </Link>
-            <Button variant="outline">Become a Mentor</Button>
-            <ThemeToggle />
-          </nav>
-          <div className="md:hidden">
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
+      <ResponsiveHeader currentPage="dashboard" />
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">My Dashboard</h1>
-          <p className="text-gray-600">Manage your mentorship sessions and track your progress</p>
+        <div className="mb-6 sm:mb-8 text-center sm:text-left">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2">My Dashboard</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">Manage your mentorship sessions and track your progress</p>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
           <Card className="border-0 shadow-md">
-            <CardContent className="p-6">
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Total Sessions</p>
-                  <p className="text-2xl font-bold text-gray-900">{bookings.length}</p>
+                  <p className="text-xs sm:text-sm font-medium text-muted-foreground">Total Sessions</p>
+                  <p className="text-lg sm:text-2xl font-bold text-foreground">{bookings.length}</p>
                 </div>
-                <Calendar className="h-8 w-8 text-blue-600" />
+                <Calendar className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
               </div>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-md">
-            <CardContent className="p-6">
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Upcoming</p>
-                  <p className="text-2xl font-bold text-gray-900">{upcomingBookings.length}</p>
+                  <p className="text-xs sm:text-sm font-medium text-muted-foreground">Upcoming</p>
+                  <p className="text-lg sm:text-2xl font-bold text-foreground">{upcomingBookings.length}</p>
                 </div>
-                <Clock className="h-8 w-8 text-green-600" />
+                <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
               </div>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-md">
-            <CardContent className="p-6">
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Completed</p>
-                  <p className="text-2xl font-bold text-gray-900">{pastBookings.length}</p>
+                  <p className="text-xs sm:text-sm font-medium text-muted-foreground">Completed</p>
+                  <p className="text-lg sm:text-2xl font-bold text-foreground">{pastBookings.length}</p>
                 </div>
-                <CheckCircle className="h-8 w-8 text-blue-600" />
+                <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
               </div>
             </CardContent>
           </Card>
 
           <Card className="border-0 shadow-md">
-            <CardContent className="p-6">
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Mentors</p>
-                  <p className="text-2xl font-bold text-gray-900">{new Set(bookings.map((b) => b.mentorId)).size}</p>
+                  <p className="text-xs sm:text-sm font-medium text-muted-foreground">Mentors</p>
+                  <p className="text-lg sm:text-2xl font-bold text-foreground">{new Set(bookings.map((b) => b.mentorId)).size}</p>
                 </div>
-                <User className="h-8 w-8 text-purple-600" />
+                <User className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600" />
               </div>
             </CardContent>
           </Card>
@@ -201,57 +178,69 @@ export default function DashboardPage() {
 
         {/* Sessions Tabs */}
         <Card className="border-0 shadow-md">
-          <CardHeader>
-            <CardTitle>My Sessions</CardTitle>
+          <CardHeader className="p-4 sm:p-6">
+            <CardTitle className="text-lg sm:text-xl">My Sessions</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4 sm:p-6 pt-0">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="upcoming">Upcoming ({upcomingBookings.length})</TabsTrigger>
-                <TabsTrigger value="past">Past ({pastBookings.length})</TabsTrigger>
-                <TabsTrigger value="cancelled">Cancelled ({cancelledBookings.length})</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-3 h-auto">
+                <TabsTrigger value="upcoming" className="text-xs sm:text-sm px-2 py-2">
+                  <span className="hidden sm:inline">Upcoming</span>
+                  <span className="sm:hidden">Up</span>
+                  <span className="ml-1">({upcomingBookings.length})</span>
+                </TabsTrigger>
+                <TabsTrigger value="past" className="text-xs sm:text-sm px-2 py-2">
+                  <span className="hidden sm:inline">Past</span>
+                  <span className="sm:hidden">Past</span>
+                  <span className="ml-1">({pastBookings.length})</span>
+                </TabsTrigger>
+                <TabsTrigger value="cancelled" className="text-xs sm:text-sm px-2 py-2">
+                  <span className="hidden sm:inline">Cancelled</span>
+                  <span className="sm:hidden">Cancel</span>
+                  <span className="ml-1">({cancelledBookings.length})</span>
+                </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="upcoming" className="mt-6">
+              <TabsContent value="upcoming" className="mt-4 sm:mt-6">
                 {upcomingBookings.length === 0 ? (
-                  <div className="text-center py-12">
-                    <Calendar className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">No upcoming sessions</h3>
-                    <p className="text-gray-600 mb-4">Book a session with a mentor to get started</p>
-                    <Button asChild>
+                  <div className="text-center py-8 sm:py-12">
+                    <Calendar className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-4" />
+                    <h3 className="text-base sm:text-lg font-medium text-foreground mb-2">No upcoming sessions</h3>
+                    <p className="text-muted-foreground text-sm sm:text-base mb-4">Book a session with a mentor to get started</p>
+                    <Button asChild className="w-full sm:w-auto">
                       <Link href="/mentors">Find a Mentor</Link>
                     </Button>
                   </div>
                 ) : (
                   <div className="space-y-4">
                     {upcomingBookings.map((booking) => (
-                      <Card key={booking.id} className="border border-gray-200">
-                        <CardContent className="p-6">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <div className="flex items-center space-x-2 mb-2">
-                                <h3 className="text-lg font-semibold text-gray-900">{booking.mentorName}</h3>
+                      <Card key={booking.id} className="border">
+                        <CardContent className="p-4 sm:p-6">
+                          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-3">
+                                <h3 className="text-base sm:text-lg font-semibold text-foreground truncate">{booking.mentorName}</h3>
                                 <Badge className={getStatusColor(booking.status)}>
                                   {getStatusIcon(booking.status)}
                                   <span className="ml-1 capitalize">{booking.status}</span>
                                 </Badge>
                               </div>
 
-                              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                                <div className="flex items-center text-gray-600">
-                                  <Calendar className="h-4 w-4 mr-2" />
-                                  <span>{formatDate(booking.date)}</span>
+                              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4">
+                                <div className="flex items-center text-muted-foreground text-sm">
+                                  <Calendar className="h-4 w-4 mr-2 flex-shrink-0" />
+                                  <span className="truncate">{formatDate(booking.date)}</span>
                                 </div>
-                                <div className="flex items-center text-gray-600">
-                                  <Clock className="h-4 w-4 mr-2" />
+                                <div className="flex items-center text-muted-foreground text-sm">
+                                  <Clock className="h-4 w-4 mr-2 flex-shrink-0" />
                                   <span>{booking.time}</span>
                                 </div>
-                                <div className="flex items-center text-gray-600">
+                                <div className="flex items-center text-muted-foreground text-sm">
                                   <span className="font-medium">₹{booking.amount.toLocaleString()}</span>
                                 </div>
                               </div>
 
-                              <p className="text-gray-700 mb-4">{booking.reason}</p>
+                              <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{booking.reason}</p>
 
                               {booking.sessionType && (
                                 <Badge variant="outline" className="mb-4">
@@ -260,17 +249,20 @@ export default function DashboardPage() {
                               )}
                             </div>
 
-                            <div className="flex flex-col space-y-2 ml-4">
-                              <Button size="sm" className="bg-green-600 hover:bg-green-700">
-                                <Video className="h-4 w-4 mr-2" />
-                                Join Session
+                            <div className="flex flex-row lg:flex-col gap-2 lg:ml-4">
+                              <Button size="sm" className="bg-green-600 hover:bg-green-700 flex-1 lg:flex-none">
+                                <Video className="h-4 w-4 mr-1 sm:mr-2" />
+                                <span className="hidden sm:inline">Join Session</span>
+                                <span className="sm:hidden">Join</span>
                               </Button>
-                              <Button size="sm" variant="outline">
-                                <MessageCircle className="h-4 w-4 mr-2" />
-                                Message
+                              <Button size="sm" variant="outline" className="flex-1 lg:flex-none">
+                                <MessageCircle className="h-4 w-4 mr-1 sm:mr-2" />
+                                <span className="hidden sm:inline">Message</span>
+                                <span className="sm:hidden">Msg</span>
                               </Button>
-                              <Button size="sm" variant="destructive" onClick={() => handleCancelBooking(booking.id)}>
-                                Cancel
+                              <Button size="sm" variant="destructive" onClick={() => handleCancelBooking(booking.id)} className="flex-1 lg:flex-none">
+                                <span className="hidden sm:inline">Cancel</span>
+                                <span className="sm:hidden">Cancel</span>
                               </Button>
                             </div>
                           </div>
@@ -281,43 +273,43 @@ export default function DashboardPage() {
                 )}
               </TabsContent>
 
-              <TabsContent value="past" className="mt-6">
+              <TabsContent value="past" className="mt-4 sm:mt-6">
                 {pastBookings.length === 0 ? (
-                  <div className="text-center py-12">
-                    <CheckCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">No past sessions</h3>
-                    <p className="text-gray-600">Your completed sessions will appear here</p>
+                  <div className="text-center py-8 sm:py-12">
+                    <CheckCircle className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-4" />
+                    <h3 className="text-base sm:text-lg font-medium text-foreground mb-2">No past sessions</h3>
+                    <p className="text-muted-foreground text-sm sm:text-base">Your completed sessions will appear here</p>
                   </div>
                 ) : (
                   <div className="space-y-4">
                     {pastBookings.map((booking) => (
-                      <Card key={booking.id} className="border border-gray-200">
-                        <CardContent className="p-6">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <div className="flex items-center space-x-2 mb-2">
-                                <h3 className="text-lg font-semibold text-gray-900">{booking.mentorName}</h3>
+                      <Card key={booking.id} className="border">
+                        <CardContent className="p-4 sm:p-6">
+                          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-3">
+                                <h3 className="text-base sm:text-lg font-semibold text-foreground truncate">{booking.mentorName}</h3>
                                 <Badge className={getStatusColor("completed")}>
                                   {getStatusIcon("completed")}
                                   <span className="ml-1">Completed</span>
                                 </Badge>
                               </div>
 
-                              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                                <div className="flex items-center text-gray-600">
-                                  <Calendar className="h-4 w-4 mr-2" />
-                                  <span>{formatDate(booking.date)}</span>
+                              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4">
+                                <div className="flex items-center text-muted-foreground text-sm">
+                                  <Calendar className="h-4 w-4 mr-2 flex-shrink-0" />
+                                  <span className="truncate">{formatDate(booking.date)}</span>
                                 </div>
-                                <div className="flex items-center text-gray-600">
-                                  <Clock className="h-4 w-4 mr-2" />
+                                <div className="flex items-center text-muted-foreground text-sm">
+                                  <Clock className="h-4 w-4 mr-2 flex-shrink-0" />
                                   <span>{booking.time}</span>
                                 </div>
-                                <div className="flex items-center text-gray-600">
+                                <div className="flex items-center text-muted-foreground text-sm">
                                   <span className="font-medium">₹{booking.amount.toLocaleString()}</span>
                                 </div>
                               </div>
 
-                              <p className="text-gray-700 mb-4">{booking.reason}</p>
+                              <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{booking.reason}</p>
 
                               {booking.sessionType && (
                                 <Badge variant="outline" className="mb-4">
@@ -326,14 +318,16 @@ export default function DashboardPage() {
                               )}
                             </div>
 
-                            <div className="flex flex-col space-y-2 ml-4">
-                              <Button size="sm" variant="outline">
-                                <Star className="h-4 w-4 mr-2" />
-                                Rate Session
+                            <div className="flex flex-row lg:flex-col gap-2 lg:ml-4">
+                              <Button size="sm" variant="outline" className="flex-1 lg:flex-none">
+                                <Star className="h-4 w-4 mr-1 sm:mr-2" />
+                                <span className="hidden sm:inline">Rate Session</span>
+                                <span className="sm:hidden">Rate</span>
                               </Button>
-                              <Button size="sm" variant="outline">
-                                <MessageCircle className="h-4 w-4 mr-2" />
-                                Message
+                              <Button size="sm" variant="outline" className="flex-1 lg:flex-none">
+                                <MessageCircle className="h-4 w-4 mr-1 sm:mr-2" />
+                                <span className="hidden sm:inline">Message</span>
+                                <span className="sm:hidden">Msg</span>
                               </Button>
                             </div>
                           </div>
@@ -344,43 +338,43 @@ export default function DashboardPage() {
                 )}
               </TabsContent>
 
-              <TabsContent value="cancelled" className="mt-6">
+              <TabsContent value="cancelled" className="mt-4 sm:mt-6">
                 {cancelledBookings.length === 0 ? (
-                  <div className="text-center py-12">
-                    <XCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <h3 className="text-lg font-medium text-gray-900 mb-2">No cancelled sessions</h3>
-                    <p className="text-gray-600">Your cancelled sessions will appear here</p>
+                  <div className="text-center py-8 sm:py-12">
+                    <XCircle className="h-10 w-10 sm:h-12 sm:w-12 text-muted-foreground mx-auto mb-4" />
+                    <h3 className="text-base sm:text-lg font-medium text-foreground mb-2">No cancelled sessions</h3>
+                    <p className="text-muted-foreground text-sm sm:text-base">Your cancelled sessions will appear here</p>
                   </div>
                 ) : (
                   <div className="space-y-4">
                     {cancelledBookings.map((booking) => (
-                      <Card key={booking.id} className="border border-gray-200 opacity-75">
-                        <CardContent className="p-6">
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <div className="flex items-center space-x-2 mb-2">
-                                <h3 className="text-lg font-semibold text-gray-900">{booking.mentorName}</h3>
+                      <Card key={booking.id} className="border opacity-75">
+                        <CardContent className="p-4 sm:p-6">
+                          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-3">
+                                <h3 className="text-base sm:text-lg font-semibold text-foreground truncate">{booking.mentorName}</h3>
                                 <Badge className={getStatusColor("cancelled")}>
                                   {getStatusIcon("cancelled")}
                                   <span className="ml-1">Cancelled</span>
                                 </Badge>
                               </div>
 
-                              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                                <div className="flex items-center text-gray-600">
-                                  <Calendar className="h-4 w-4 mr-2" />
-                                  <span>{formatDate(booking.date)}</span>
+                              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4">
+                                <div className="flex items-center text-muted-foreground text-sm">
+                                  <Calendar className="h-4 w-4 mr-2 flex-shrink-0" />
+                                  <span className="truncate">{formatDate(booking.date)}</span>
                                 </div>
-                                <div className="flex items-center text-gray-600">
-                                  <Clock className="h-4 w-4 mr-2" />
+                                <div className="flex items-center text-muted-foreground text-sm">
+                                  <Clock className="h-4 w-4 mr-2 flex-shrink-0" />
                                   <span>{booking.time}</span>
                                 </div>
-                                <div className="flex items-center text-gray-600">
+                                <div className="flex items-center text-muted-foreground text-sm">
                                   <span className="font-medium">₹{booking.amount.toLocaleString()}</span>
                                 </div>
                               </div>
 
-                              <p className="text-gray-700 mb-4">{booking.reason}</p>
+                              <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{booking.reason}</p>
 
                               {booking.sessionType && (
                                 <Badge variant="outline" className="mb-4">
@@ -389,10 +383,11 @@ export default function DashboardPage() {
                               )}
                             </div>
 
-                            <div className="flex flex-col space-y-2 ml-4">
-                              <Button size="sm" variant="outline">
-                                <MessageCircle className="h-4 w-4 mr-2" />
-                                Message
+                            <div className="flex flex-row lg:flex-col gap-2 lg:ml-4">
+                              <Button size="sm" variant="outline" className="flex-1 lg:flex-none">
+                                <MessageCircle className="h-4 w-4 mr-1 sm:mr-2" />
+                                <span className="hidden sm:inline">Message</span>
+                                <span className="sm:hidden">Msg</span>
                               </Button>
                             </div>
                           </div>

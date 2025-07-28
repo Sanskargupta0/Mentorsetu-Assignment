@@ -127,35 +127,36 @@ export function BookingModal({ isOpen, onClose, mentor }: BookingModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto mx-4">
         <DialogHeader>
-          <DialogTitle>Book a Session with {mentor.name}</DialogTitle>
+          <DialogTitle className="text-lg sm:text-xl">Book a Session with {mentor.name}</DialogTitle>
         </DialogHeader>
 
         {showPayment ? (
-          <div className="text-center py-8">
-            <CreditCard className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Processing Payment...</h3>
-            <p className="text-gray-600 mb-4">
+          <div className="text-center py-6 sm:py-8">
+            <CreditCard className="h-10 w-10 sm:h-12 sm:w-12 text-blue-600 dark:text-blue-400 mx-auto mb-4" />
+            <h3 className="text-base sm:text-lg font-semibold mb-2 text-foreground">Processing Payment...</h3>
+            <p className="text-muted-foreground text-sm sm:text-base mb-4">
               Please wait while we process your payment of ₹{mentor.price.toLocaleString()}
             </p>
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-600 dark:border-blue-400 mx-auto"></div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="studentName">Full Name *</Label>
+                <Label htmlFor="studentName" className="text-sm">Full Name *</Label>
                 <Input
                   id="studentName"
                   value={formData.studentName}
                   onChange={(e) => setFormData({ ...formData, studentName: e.target.value })}
                   placeholder="Enter your full name"
                   required
+                  className="mt-1"
                 />
               </div>
               <div>
-                <Label htmlFor="email">Email *</Label>
+                <Label htmlFor="email" className="text-sm">Email *</Label>
                 <Input
                   id="email"
                   type="email"
@@ -163,11 +164,12 @@ export function BookingModal({ isOpen, onClose, mentor }: BookingModalProps) {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="Enter your email"
                   required
+                  className="mt-1"
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <Label>Select Date *</Label>
                 <Popover>
@@ -245,23 +247,23 @@ export function BookingModal({ isOpen, onClose, mentor }: BookingModalProps) {
               />
             </div>
 
-            <div className="bg-gray-50 p-4 rounded-lg">
+            <div className="bg-muted/30 dark:bg-muted/50 p-4 rounded-lg border">
               <div className="flex justify-between items-center mb-2">
-                <span className="font-medium">Session Duration:</span>
-                <span>60 minutes</span>
+                <span className="font-medium text-foreground">Session Duration:</span>
+                <span className="text-muted-foreground">60 minutes</span>
               </div>
               <div className="flex justify-between items-center mb-2">
-                <span className="font-medium">Session Fee:</span>
-                <span>₹{mentor.price.toLocaleString()}</span>
+                <span className="font-medium text-foreground">Session Fee:</span>
+                <span className="text-muted-foreground">₹{mentor.price.toLocaleString()}</span>
               </div>
               <div className="flex justify-between items-center font-bold text-lg border-t pt-2">
-                <span>Total Amount:</span>
-                <span>₹{mentor.price.toLocaleString()}</span>
+                <span className="text-foreground">Total Amount:</span>
+                <span className="text-foreground">₹{mentor.price.toLocaleString()}</span>
               </div>
             </div>
 
             <div className="flex gap-3">
-              <Button type="button" variant="outline" onClick={onClose} className="flex-1 bg-transparent">
+              <Button type="button" variant="outline" onClick={onClose} className="flex-1">
                 Cancel
               </Button>
               <Button type="submit" disabled={isSubmitting} className="flex-1">
