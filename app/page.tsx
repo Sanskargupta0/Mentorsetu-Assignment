@@ -254,7 +254,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="border-t border-gray-800 dark:border-gray-700 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-gray-400">
-            <p className="text-sm sm:text-base">&copy; 2024 MentorSetu.ai. All rights reserved.</p>
+            <p className="text-sm sm:text-base">&copy; 2025 MentorSetu.ai. All rights reserved.</p>
           </div>
         </div>
       </footer>
